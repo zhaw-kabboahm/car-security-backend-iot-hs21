@@ -29,7 +29,6 @@ function handleTrainingStart(event) {
 
     try {        
         // you can add more properties to your data object
-        // data.myMessage = "Hello World";
 
         // TODO: do something meaningful with the data
 
