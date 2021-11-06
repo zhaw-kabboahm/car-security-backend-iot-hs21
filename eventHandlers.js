@@ -30,8 +30,6 @@ function handleTrainingStart(event) {
     try {        
         // you can add more properties to your data object
 
-        // TODO: do something meaningful with the data
-
         // Log the event in the database
         logger.logOne("MyDB", "trainingStart", data);
 
