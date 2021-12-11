@@ -3,20 +3,27 @@ const logger = require('./db/logger.js');
 exports.sendEvent = null;
 
 exports.registerEventHandlers = function (source) {
-    // trainingStart
-    source.addEventListener('trainingStart', handleTrainingStart);
+    // Health-Check
+    source.addEventListener('heartbeat', handleCarSecurityEvents);
 
-    // trainingEnd
-    source.addEventListener('trainingEnd', handleTrainingEnd);
+    // Anzahl Türöffungen soweit
+    source.addEventListener('tuerOeffnungsCounter', handleCarSecurityEvents);
 
-    // totalHantelbewegung
-    source.addEventListener('totalHantelbewegung', handleBewegungsCounter);
+    // Auto Status derzeit
+    source.addEventListener('autoStatus', handleCarSecurityEvents);
 
-    // Last BewegungsCounter
-    source.addEventListener('lastBewegungsCounter', handleLastBewegungsCounter);
+    // Alarm geht zu
+    source.addEventListener('alarmStatus', handleCarSecurityEvents);
+
+    // Alarm manuel abgestellt
+    source.addEventListener('manualSwitchOffAlarm', handleCarSecurityEvents);
+
+    // Meldungen aus dem Argon
+    source.addEventListener('meldung', handleCarSecurityEvents);
+
 }
 
-function handleTrainingStart(event) {
+function handleCarSecurityEvents(event) {
     // read variables from the event
     var data = {
         eventName: event.type,
@@ -25,13 +32,11 @@ function handleTrainingStart(event) {
         timestamp: JSON.parse(event.data).published_at
     };
 
-    //var datetime = new Date(data.timestamp); // convert the timestamp to a Date object
-
     try {        
         // you can add more properties to your data object
 
         // Log the event in the database
-        logger.logOne("MyDB", "trainingStart", data);
+        // logger.logOne("MyDB", "carSecuritySystem", data);
 
         // send data to all connected clients
         exports.sendEvent(data);
@@ -40,116 +45,3 @@ function handleTrainingStart(event) {
         console.log(error)
     }
 }
-
-function handleTrainingEnd(event) {
-    // read variables from the event
-    var data = {
-        eventName: event.type,
-        eventData: JSON.parse(event.data).data, // the value of the event
-        deviceId: JSON.parse(event.data).coreid,
-        timestamp: JSON.parse(event.data).published_at
-    };
-
-    //var datetime = new Date(data.timestamp); // convert the timestamp to a Date object
-
-    try {        
-        // you can add more properties to your data object
-        // data.myMessage = "Hello World";
-
-        // TODO: do something meaningful with the data
-
-        // Log the event in the database
-        logger.logOne("MyDB", "trainingEnd", data);
-
-        // send data to all connected clients
-        exports.sendEvent(data);
-    } catch (error) {
-        console.log("Could not handle event: " + JSON.stringify(event) + "\n");
-        console.log(error)
-    }
-}
-
-function handleBewegungsCounter(event) {
-    // read variables from the event
-    var data = {
-        eventName: event.type,
-        eventData: JSON.parse(event.data).data, // the value of the event
-        deviceId: JSON.parse(event.data).coreid,
-        timestamp: JSON.parse(event.data).published_at
-    };
-
-    //var datetime = new Date(data.timestamp); // convert the timestamp to a Date object
-
-    try {        
-        // you can add more properties to your data object
-        // data.myMessage = "Hello World";
-
-        // TODO: do something meaningful with the data
-
-        // Log the event in the database
-        logger.logOne("MyDB", "totalHantelbewegung", data);
-
-        // send data to all connected clients
-        exports.sendEvent(data);
-    } catch (error) {
-        console.log("Could not handle event: " + JSON.stringify(event) + "\n");
-        console.log(error)
-    }
-}
-
-function handleLastBewegungsCounter(event) {
-    // read variables from the event
-    var data = {
-        eventName: event.type,
-        eventData: JSON.parse(event.data).data, // the value of the event
-        deviceId: JSON.parse(event.data).coreid,
-        timestamp: JSON.parse(event.data).published_at
-    };
-
-    //var datetime = new Date(data.timestamp); // convert the timestamp to a Date object
-
-    try {        
-        // you can add more properties to your data object
-        // data.myMessage = "Hello World";
-
-        // TODO: do something meaningful with the data
-
-        // Log the event in the database
-        logger.logOne("MyDB", "lastBewegungsCounter", data);
-
-        // send data to all connected clients
-        exports.sendEvent(data);
-    } catch (error) {
-        console.log("Could not handle event: " + JSON.stringify(event) + "\n");
-        console.log(error)
-    }
-}
-/*
-function handleMyEvent(event) {
-    // read variables from the event
-    var data = {
-        eventName: event.type,
-        eventData: JSON.parse(event.data).data, // the value of the event
-        deviceId: JSON.parse(event.data).coreid,
-        timestamp: JSON.parse(event.data).published_at
-    };
-
-    //var datetime = new Date(data.timestamp); // convert the timestamp to a Date object
-
-    try {        
-        // you can add more properties to your data object
-        data.myMessage = "Hello World";
-
-        // TODO: do something meaningful with the data
-
-        // Log the event in the database
-        logger.logOne("MyDB", "trainingEnd", data);
-
-        // send data to all connected clients
-        exports.sendEvent(data);
-    } catch (error) {
-        console.log("Could not handle event: " + JSON.stringify(event) + "\n");
-        console.log(error)
-    }
-}
-*/

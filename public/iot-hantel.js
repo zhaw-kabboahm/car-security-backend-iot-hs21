@@ -39,6 +39,15 @@ function updateVariables(data) {
     }
 }
 
+async function getLastBewegungsCounter() {
+    // request the variable "lastBewegungsCounter"
+    var response = await axios.get(rootUrl + "/api/device/0/variable/lastBewegungsCounter");
+    var lastBewegungsCounter = response.data.result;
+
+    // update the html element
+    document.getElementById("buttonlastbewegungscounter").innerHTML = lastBewegungsCounter;
+}
+
 async function setCounter() {
     // read the value from the input field
     var counter = document.getElementById("counterinput").value;
@@ -48,13 +57,4 @@ async function setCounter() {
 
     // Handle the response from the server
     alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
-}
-
-async function getLastBewegungsCounter() {
-    // request the variable "lastBewegungsCounter"
-    var response = await axios.get(rootUrl + "/api/device/0/variable/lastBewegungsCounter");
-    var lastBewegungsCounter = response.data.result;
-
-    // update the html element
-    document.getElementById("buttonlastbewegungscounter").innerHTML = lastBewegungsCounter;
 }
