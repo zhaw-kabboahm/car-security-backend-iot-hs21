@@ -11,7 +11,7 @@
     <h4>Events</h4>
     <!-- Events example -->
     <p>Last Event: <span id="lastevent"></span></p>
-    <p>autoStatus: <span id="autostatuserevent"></span></p>
+    <p>autoStatus: <span id="autostatusevent"></span></p>
     <p>alarmStatus: <span id="alarmstatusevent"></span></p>
     <p>Meldung: <span id="meldungevent"></span></p>
 
@@ -28,6 +28,12 @@
     <p>Switch Alarm</p>
     <input type="text" id="manualswitchoffalarminput" value="off">
     <button onclick="manualSwitchOffAlarm()">Kill Alarm</button>
+
+    <p>
+        <button onclick="getResult()">Get Result</button>
+    </p>
+
+    <p id="result">-</p>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="car_security_system.js"></script>
