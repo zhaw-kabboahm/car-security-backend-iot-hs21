@@ -3,8 +3,9 @@
     "",
     "\\config",
     "\\db",
-    "\\public"
+    "\\public",
+    "\\routes"
   ],
-  "SelectedNode": "\\config\\devices.js",
+  "SelectedNode": "\\public\\visualization.html",
   "PreviewInSolutionExplorer": false
 }

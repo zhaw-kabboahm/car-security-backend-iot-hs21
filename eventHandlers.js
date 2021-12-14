@@ -33,10 +33,11 @@ function handleCarSecurityEvents(event) {
     };
 
     try {        
-        // you can add more properties to your data object
+      
+        //console.log("batticha") //Debugging
 
         // Log the event in the database
-        // logger.logOne("MyDB", "carSecuritySystem", data);
+        logger.logOne("MyDB", "carSecuritySystem", data);
 
         // send data to all connected clients
         exports.sendEvent(data);

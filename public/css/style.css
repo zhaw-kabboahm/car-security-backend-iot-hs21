@@ -1430,6 +1430,7 @@ button.disabled:focus {
   padding: 10px 20px;
   background-color: #2f49d1;
   color: #fff;
+  right: -200px:
 }
 
 .primary-default-btn:hover {
