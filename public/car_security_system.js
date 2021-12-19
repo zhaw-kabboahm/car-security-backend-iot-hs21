@@ -16,13 +16,9 @@ initSSE();
 
 // initialise some elements in the HTML
 async function init() {
-    // This initializes our posts table as a dataTable with funky functions
-    jQuery( function () {
-        var table = $('.posts-table').DataTable();
-    });
     var responseAutoStatus = await axios.get(rootUrl + "/api/device/0/variable/autoStatus");
 
-    if (responseAutoStatus.data.result !== "Tür ist geschlossen") {
+    if (responseAutoStatus.data.result !== "Tuer ist geschlossen") {
         document.getElementById("meldungeventID").style.background = "red";
         document.getElementById('autoStatusID').style.color = "white";
         document.getElementById('autostatusevent').style.color = "white";
@@ -108,7 +104,6 @@ function updateCarStatus(data) {
 
         document.getElementById('myManualSwitchButton').checked = true;
     }
-    getResult();
 }
 
 async function getTuerOeffnungsCounter() {
@@ -161,42 +156,3 @@ async function manualSwitchOffAlarm() {
         }
 
 }
-
-async function getResult() {
-    var dbName = "MyDB";
-    var collectionName = "carSecuritySystem";
-    var query = "";
-
-
-    // e.g. http://localhost:3001/api/MyDB/MotionDetected?timestamp=13:00
-    var url = rootUrl + "/api/" + dbName + "/" + collectionName +"?" + query;
-
-    var response = await axios.get(url);
-
-    var result = response.data;
-
-    result.sort(function (firstElement, secondElement) {
-        return Date.parse(secondElement.timestamp) - Date.parse(firstElement.timestamp);
-    });
-    var eventsCounter = document.getElementById("eventsCounter");
-    eventsCounter.innerHTML = `Events counter: ${result.length}`;
-
-    jQuery(function () {
-        $('.posts-table').DataTable().clear();
-        for (element of result) {
-            $('.posts-table').DataTable().row.add(
-                {
-                    "0": element.eventName !== undefined ? element.eventName : "No data",
-                    "1": element.eventData !== undefined ? element.eventData : "No data",
-                    "2": element.deviceId !== undefined ? element.deviceId : "No data",
-                    "3": element.timestamp !== undefined ? element.timestamp : "No data",
-                    "4": element.deviceNumber !== undefined ? element.deviceNumber : "No data"
-                }
-             ).draw();
-        }
-    });
-
-    // Only for debugging purposes
-    console.log(JSON.stringify(result));
-}
-getResult();
