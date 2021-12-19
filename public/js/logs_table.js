@@ -70,3 +70,22 @@ async function getResult() {
     console.log(JSON.stringify(result));
 }
 getResult();
+
+
+
+async function sentNotificationToParkHaus() {
+
+    // call the function
+    var response = await axios.post(rootUrl + "/api/device/0/function/sentNotificationToParkHaus", {arg: "Sende Email-Notification"});
+
+
+    if (response.data.result == 1){
+        document.getElementById("notificationStatus").innerHTML = "Email send!";
+        alert("Email Notification erfolgreich gesendet. Es kann bis 15 Minuten Dauern bis die Email ankommt"); 
+    } else {
+        document.getElementById("notificationStatus").innerHTML = "Email wurde schon verschickt";
+        alert("Eine Email wurde schon geschickt!"); 
+    }
+    // Handle the response from the server
+    //alert("Notification send:" + response.data.result); // we could to something meaningful with the return value here ... 
+}
