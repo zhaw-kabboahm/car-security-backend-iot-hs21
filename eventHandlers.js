@@ -3,9 +3,6 @@ const logger = require('./db/logger.js');
 exports.sendEvent = null;
 
 exports.registerEventHandlers = function (source) {
-    // Health-Check
-    source.addEventListener('heartbeat', handleCarSecurityEvents);
-
     // Anzahl Türöffungen soweit
     source.addEventListener('tuerOeffnungsCounter', handleCarSecurityEvents);
 

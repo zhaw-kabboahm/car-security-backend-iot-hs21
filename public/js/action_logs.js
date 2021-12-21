@@ -72,7 +72,7 @@ async function getResult() {
 getResult();
 
 
-
+// manuelles senden eines Emails
 async function sentNotificationToParkHaus() {
 
     // call the function
@@ -86,6 +86,4 @@ async function sentNotificationToParkHaus() {
         document.getElementById("notificationStatus").innerHTML = "Email wurde schon verschickt";
         alert("Eine Email wurde schon geschickt!"); 
     }
-    // Handle the response from the server
-    //alert("Notification send:" + response.data.result); // we could to something meaningful with the return value here ... 
 }

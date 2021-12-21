@@ -128,9 +128,6 @@ async function manualSwitchOffAlarm() {
     // show meaningful Alert Message
     var responseMeldung = await axios.get(rootUrl + "/api/device/0/variable/meldung");
 
-    // Handle the response from the server
-    //alert(responseMeldung.data.result);
-
     document.getElementById("myManualSwitchButton").checked = false;
 
     // for testing
@@ -145,9 +142,6 @@ async function manualSwitchOffAlarm() {
 
         // show meaningful Alert Message
         var responseMeldung = await axios.get(rootUrl + "/api/device/0/variable/meldung");
-
-        // Handle the response from the server
-        //alert(responseMeldung.data.result);
 
         document.getElementById("myManualSwitchButton").checked = true;
 
